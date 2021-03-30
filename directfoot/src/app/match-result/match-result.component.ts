@@ -9,23 +9,26 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./match-result.component.css']
 })
 
-
-
 export class MatchResultComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io"
   
-  
-  JSONparse = ""
 
-  getPosts (){
+  refresh (){
     const headers = new HttpHeaders()
       .set('x-rapidapi-host', 'v3.football.api-sports.io')
       .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
 
     this.http.get(this.ROOT_URL + '/fixtures?last=1' ,{ headers , responseType: 'text' } )
-            .subscribe( data => this.JSONparse = JSON.parse(data) );
-    
+            .subscribe( data =>  this.dataParser( JSON.parse(data) ) );
+
+  }
+
+
+  dataParser( data:Content ){
+    //this.response = data.response
+    this.statutMatch = data.get
+    console.log(data.response[0])    
   }
 
   constructor(private http: HttpClient) { }
@@ -43,21 +46,46 @@ export class MatchResultComponent implements OnInit {
   durationMatch = "13\""
   matchTime = "aa";
 
+  response = ""
+
   ngOnInit(): void {
         
-  }
-
-  
-  
-  sendRequest() {
-    /*  const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-
-      return this.http
-        .get(this.url, { headers: headers })
-        .subscribe(res => res); */
-  }       
+  }     
   
   
 }
+
+interface Content {
+  get:string;
+  response:Array<Responses>;
+}
+
+interface Responses {
+  teams:Array<Teams>
+}
+
+interface Teams {
+  away:Array<TeamsContent>
+}
+
+interface TeamsContent {
+  id:string,
+  logo:string,
+  name:string,
+  winner:string
+}
+
+/*
+{
+  away: {
+    id:string,
+    logo:string,
+    name:string,
+    winner:string
+  };
+  home:{
+    id:string,
+    logo:string,
+    name:string,
+    winner:string
+  };*/

@@ -10,6 +10,8 @@ import { MatchResultComponent } from './match-result/match-result.component';
 import { LigueResultComponent } from './ligue-result/ligue-result.component';
 import { LigueCellComponent } from './ligue-cell/ligue-cell.component';
 import { MatchDetailComponent } from './match-detail/match-detail.component';
+import { SearchComponent } from './search/search.component';
+import { LigueAccueilComponent } from './ligue-accueil/ligue-accueil.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { MatchDetailComponent } from './match-detail/match-detail.component';
     MatchResultComponent,
     LigueResultComponent,
     LigueCellComponent,
-    MatchDetailComponent
+    MatchDetailComponent,
+    SearchComponent,
+    LigueAccueilComponent
   ],
   imports: [
     BrowserModule,
