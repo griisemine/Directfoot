@@ -1,0 +1,50 @@
+<style>
+      .top-cell {
+        padding-left: 5%;
+        margin: 0px;
+    }
+
+    .content-top-cell{
+        display: inline-block;
+        width: 5.5%;
+        margin: auto;
+        vertical-align: middle;
+        margin-bottom: 5px;
+    }
+
+    .team-cell {
+        width: 50%;
+    }
+
+    .logo {
+        max-width: 30px;
+        min-width: 30px;
+        max-height: 30px;
+        min-height: 30px;
+    }
+
+    .teamName {
+        margin: auto;
+        display: inline-block;
+        margin-left: 3%;
+        vertical-align: middle;
+    }
+</style>
+
+
+<div class="top-cell">
+    <p class="content-top-cell">{{classement}}</p>
+    <div class="content-top-cell team-cell">
+        <img class="logo" src="{{teamLogo}}" alt="">
+        <p class="teamName" >{{teamName}}</p>
+    </div>
+    
+    <p class="content-top-cell">{{teamPoint}}</p>
+    <p class="content-top-cell">{{teamDay}}</p>
+    <p class="content-top-cell">{{teamWin}}</p>
+    <p class="content-top-cell">{{teamNill}}</p>
+    <p class="content-top-cell">{{teamLose}}</p>
+    <p class="content-top-cell">{{teamBP}}</p>
+    <p class="content-top-cell">{{teamBC}}</p>
+    <p class="content-top-cell">{{teamDIF}}</p>
+</div>

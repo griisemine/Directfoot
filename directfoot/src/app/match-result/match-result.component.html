@@ -1,0 +1,96 @@
+<style>
+
+    .card {
+        background-color: rgb(63, 63, 63);
+        width: 350px;
+        height: 110px;
+        border-radius: 10px;
+        font-size: 1.5em;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        transition-duration: 0.2s;
+    }
+
+    .card:hover {
+        box-shadow: 1px -1px 26px 4px rgba(0,0,0,0.75);
+        transform: scale(1.01)
+    }
+
+    .score {
+        vertical-align: middle;
+        color: white;
+    }
+
+    .logo {
+        max-width: 30px;
+        min-width: 30px;
+        max-height: 30px;
+        min-height: 30px;
+    }
+
+    .equipe-name {
+        margin-left: 20px;
+        min-width: 500px;
+        color: rgba(255, 255, 255, 0.571);
+        font-size: 1.2emx;
+        vertical-align: middle;
+    }
+
+    .div-equipe-name {
+        display: inline-block;
+        min-width: 70%;
+    }
+
+
+    .separator {
+        opacity: 0.3;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .left-row {
+        min-width: 70%;
+        display: inline-block;
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .right-row {
+        display: inline-block;
+        min-width: 30%;
+        text-align: center;
+        vertical-align: top;
+        margin-top: 18px;
+    }
+
+    .statut {
+        display: block;
+        color: white;
+        font-size: 0.8em;
+        opacity: 0.8;
+        
+        
+    }
+
+</style>
+
+<div class="card">
+    <div class="left-row">
+        <div>
+            <img src="{{localLogo}}" alt="" class="logo">
+            <div class="div-equipe-name"> <a class="equipe-name">{{localTeam}}</a> </div>
+            <a class="score">{{localScore}}</a>
+        </div>
+        <hr class="separator">
+        <div style="margin-bottom: 5px;">
+            <img src="{{visitorLogo}}" alt="" class="logo">
+            <div class="div-equipe-name"><a class="equipe-name">{{visitorTeam}}</a></div>
+            <a class="score">{{visitorScore}}</a>
+        </div>
+    </div>
+    <div class="right-row">
+        <a href="" class="statut">{{statutMatch}}</a>
+        <a href="" class="date">{{durationMatch}}</a>
+    </div>
+</div>

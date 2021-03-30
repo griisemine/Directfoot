@@ -1,0 +1,55 @@
+<style>
+    .row-ligue{
+        min-width: 500px;
+        max-width: 800px;
+        height: auto;
+        background-color: rgb(63, 63, 63);;
+        border-radius: 15px;
+        font-size: 1.3em;
+        padding-top: 10px;
+    }
+
+    .top-cell {
+        padding-left: 5%;
+        margin: 0px;
+    }
+
+    .content-top-cell{
+        display: inline-block;
+        width: 5.5%;
+    }
+
+    .team-cell {
+        width: 50%;
+    }
+
+    .separator {
+        opacity: 0.3;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+</style>
+
+
+<div class="row-ligue">
+    <div class="top-cell">
+        <p class="content-top-cell">#</p>
+        <p class="content-top-cell team-cell">Equipe</p>
+        <p class="content-top-cell ">Pts</p>
+        <p class="content-top-cell ">J</p>
+        <p class="content-top-cell ">G</p>
+        <p class="content-top-cell ">N</p>
+        <p class="content-top-cell ">D</p>
+        <p class="content-top-cell ">BP</p>
+        <p class="content-top-cell ">BC</p>
+        <p class="content-top-cell ">DIF</p>
+    </div>
+    <hr class="separator">
+    <app-ligue-cell></app-ligue-cell>
+    <app-ligue-cell></app-ligue-cell>
+    <app-ligue-cell></app-ligue-cell>
+    <app-ligue-cell></app-ligue-cell>
+    <app-ligue-cell></app-ligue-cell>
+    <app-ligue-cell></app-ligue-cell>
+</div>
