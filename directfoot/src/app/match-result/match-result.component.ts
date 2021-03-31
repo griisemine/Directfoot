@@ -24,7 +24,6 @@ export class MatchResultComponent implements OnInit {
 
   }
 
-
   dataParser( data:Content ){
     //this.response = data.response
     this.statutMatch = data.get

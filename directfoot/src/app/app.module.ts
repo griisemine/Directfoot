@@ -12,6 +12,7 @@ import { LigueCellComponent } from './ligue-cell/ligue-cell.component';
 import { MatchDetailComponent } from './match-detail/match-detail.component';
 import { SearchComponent } from './search/search.component';
 import { LigueAccueilComponent } from './ligue-accueil/ligue-accueil.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LigueAccueilComponent } from './ligue-accueil/ligue-accueil.component';
     LigueCellComponent,
     MatchDetailComponent,
     SearchComponent,
-    LigueAccueilComponent
+    LigueAccueilComponent,
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
