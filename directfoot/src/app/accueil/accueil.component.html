@@ -56,6 +56,10 @@
           margin-bottom: 40px;
         }
     }
+
+    a {
+
+    }
   
   </style>
   <div class="container">
@@ -64,20 +68,12 @@
       <app-ligue-accueil></app-ligue-accueil>
     </div>
     <p class="title" >Aujourd'hui</p>
-  
+        
     <div class="wrapper">
-      <div class="teamCell"><app-match-result></app-match-result></div>
-      <div class="teamCell teamCell-right"><app-match-result></app-match-result></div>
-      <div class="teamCell"><app-match-result></app-match-result></div>
-      <div class="teamCell teamCell-right"><app-match-result></app-match-result></div>
-      <div class="teamCell"><app-match-result></app-match-result></div>
-      <div class="teamCell teamCell-right"><app-match-result></app-match-result></div>
-      <div class="teamCell"><app-match-result></app-match-result></div>
-      <div class="teamCell teamCell-right"><app-match-result></app-match-result></div>
-      <div class="teamCell"><app-match-result></app-match-result></div>
-      <div class="teamCell teamCell-right"><app-match-result></app-match-result></div>
-      <div class="teamCell"><app-match-result></app-match-result></div>
-      <div class="teamCell teamCell-right"><app-match-result></app-match-result></div>
+      <a *ngFor="let num of tabInt">
+        <div class="teamCell"><app-match-result [data]=responses[num]></app-match-result></div>
+      </a>
+      <div class="teamCell-right"></div> 
     </div>
   
     <br>

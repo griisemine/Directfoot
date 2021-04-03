@@ -13,6 +13,7 @@ import { MatchDetailComponent } from './match-detail/match-detail.component';
 import { SearchComponent } from './search/search.component';
 import { LigueAccueilComponent } from './ligue-accueil/ligue-accueil.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { AccueilComponent } from './accueil/accueil.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
