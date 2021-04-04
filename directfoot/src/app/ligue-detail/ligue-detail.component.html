@@ -1,0 +1,31 @@
+<style>
+  .select-form{
+    background-color: rgba(23, 23, 23, 0.235);
+    border: solid 1px white;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    font-size: 2.2em;
+    font-weight: bold;
+    -webkit-appearance: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<div class="container">
+    <div class="row" style="margin-bottom: 50px;">
+      <app-search></app-search>
+    </div>
+    <h1 style="text-align: center; margin-bottom: 30px;">Ligue Name</h1>
+    <app-ligue-result></app-ligue-result>
+
+
+    <select class="select-form" >
+      <option selected>Journée 22</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+</div>

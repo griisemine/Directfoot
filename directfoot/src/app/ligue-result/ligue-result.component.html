@@ -33,7 +33,7 @@
 
 </style>
 
-<div class="row-ligue">
+<div class="row-ligue" routerLink="/league">
     <div class="top-cell">
         <p class="content-top-cell">#</p>
         <p class="content-top-cell team-cell">Equipe</p>
@@ -47,28 +47,7 @@
         <p class="content-top-cell ">DIF</p>
     </div>
     <hr class="separator">
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
-    <app-ligue-cell></app-ligue-cell>
+    <a *ngFor="let num of tabInt">
+        <app-ligue-cell [standing]=standings[num]></app-ligue-cell>
+    </a>
 </div>

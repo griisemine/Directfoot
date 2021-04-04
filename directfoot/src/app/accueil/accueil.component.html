@@ -58,7 +58,7 @@
     }
 
     a {
-
+      
     }
   
   </style>
@@ -73,7 +73,7 @@
       <a *ngFor="let num of tabInt">
         <div class="teamCell"><app-match-result [data]=responses[num]></app-match-result></div>
       </a>
-      <div class="teamCell-right"></div> 
+      <div class="teamCell-right"></div>
     </div>
   
     <br>
@@ -82,7 +82,7 @@
     <br>
     <p class="title" >Ligue</p>
     <br>
-    <app-ligue-result></app-ligue-result>
+    <app-ligue-result [ligueID]="61"></app-ligue-result>
   
     <br>
     <br>

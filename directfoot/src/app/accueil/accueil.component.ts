@@ -19,7 +19,6 @@ export class AccueilComponent implements OnInit {
 
   ngOnInit(): void {
     this.sendRequest();
-  
   }
 
   data!: Content;
@@ -32,22 +31,17 @@ export class AccueilComponent implements OnInit {
     this.http.get(this.ROOT_URL + '/fixtures?league=61&season=2020' ,{ headers , responseType: 'text' } )
             .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
     
-            
-        /*    this.http.get(this.ROOT_URL + '/fixtures?date=' + this.datepipe.transform(new Date(), 'yyyy-MM-dd') || "" ,{ headers , responseType: 'text' } )
-            .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
-    console.log(this.ROOT_URL + '/fixtures?date=' + this.datepipe.transform(new Date(), 'yyyy-MM-dd') || "" )
-*/
   }
 
   dataParser( data:Content ){
     console.log(data);
-    for( var i=0 ; i < data.results ; i++ ){
+  
+     for( var i=0 ; i < data.results ; i++ ){
       this.responses[i] = data.response[i];
       console.log(data.response[i]);
       this.tabInt[i] = i;
-    }
+    } 
   }
-
 }
 
 

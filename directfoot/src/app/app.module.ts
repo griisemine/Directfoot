@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { pipe } from 'rxjs';
@@ -14,6 +15,10 @@ import { SearchComponent } from './search/search.component';
 import { LigueAccueilComponent } from './ligue-accueil/ligue-accueil.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { DatePipe } from '@angular/common';
+import { TeamDetailComponent } from './team-detail/team-detail.component';
+import { LigueDetailComponent } from './ligue-detail/ligue-detail.component';
+
+
 
 @NgModule({
   declarations: [
@@ -24,12 +29,15 @@ import { DatePipe } from '@angular/common';
     MatchDetailComponent,
     SearchComponent,
     LigueAccueilComponent,
-    AccueilComponent
+    AccueilComponent,
+    TeamDetailComponent,
+    LigueDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     DatePipe

@@ -4,6 +4,7 @@ import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-match-result',
@@ -15,7 +16,7 @@ export class MatchResultComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io"
 
-  constructor(private http: HttpClient ,  public datepipe: DatePipe) {
+  constructor(private http: HttpClient ,  public datepipe: DatePipe, private router: Router) {
     
   }
   @Input() data!: Responses;
@@ -30,7 +31,7 @@ export class MatchResultComponent implements OnInit {
 
   elapsed= "";
   statut = ""
-
+  id = -1
 
   ngOnInit(): void {
     console.log(this.data);
@@ -44,6 +45,7 @@ export class MatchResultComponent implements OnInit {
     
     this.statut = this.data.fixture.status.long
     this.elapsed = this.data.fixture.status.elapsed
+    this.id = this.data.fixture.id
 
     if (this.statut == "Match Finished") {
       this.statut = "Terminé"
@@ -58,18 +60,17 @@ export class MatchResultComponent implements OnInit {
       this.elapsed += "\"";
     }
 
-  }     
+  } 
 
-  sendRequest (){
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-
-    this.http.get(this.ROOT_URL + '/fixtures?league=61&season=2019&round=Regular Season - 1' ,{ headers , responseType: 'text' } )
-            .subscribe( data =>   JSON.parse(data)  );
-
+  getId():number {
+    return this.id;
   }
 
+  goToStat(){
+   // console.log("gotToStats of fixture id = " + this.data.fixture.id)
+    const navigationDetails: string[] = ['match-detail'];
+    this.router.navigate(navigationDetails);
+  }
   
   
 }
