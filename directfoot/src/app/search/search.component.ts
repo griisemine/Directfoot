@@ -12,4 +12,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  print(event: any){
+    console.log(event.target.value)
+  }
 }

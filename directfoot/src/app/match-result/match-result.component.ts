@@ -21,50 +21,52 @@ export class MatchResultComponent implements OnInit {
   }
   @Input() data!: Responses;
   
-  homeLogo = ""
-  homeName = ""
-  homeScore = ""
+  homeLogo = "https://media.api-sports.io/football/teams/9244.png"
+  homeName = "no_data"
+  homeScore = "-"
+  homeId = ""
 
-  awayLogo = ""
-  awayName = ""
-  awayScore = ""
+  awayLogo = "https://media.api-sports.io/football/teams/9244.png"
+  awayName = "no_data"
+  awayScore = "-"
+  awayId = ""
 
-  elapsed= "";
-  statut = ""
-  id = -1
+  elapsed= "-";
+  statut = "no_data"
+  id = ""
 
   ngOnInit(): void {
-    console.log(this.data);
-    this.homeLogo = this.data.teams.home.logo
-    this.homeName = this.data.teams.home.name
-    this.homeScore = this.data.goals.home
+    if(this.data != null){
+      console.log(this.data);
+      this.homeLogo = this.data.teams.home.logo
+      this.homeName = this.data.teams.home.name
+      this.homeScore = this.data.goals.home
+      this.homeId = this.data.teams.home.id
 
-    this.awayLogo = this.data.teams.away.logo
-    this.awayName = this.data.teams.away.name
-    this.awayScore = this.data.goals.away
-    
-    this.statut = this.data.fixture.status.long
-    this.elapsed = this.data.fixture.status.elapsed
-    this.id = this.data.fixture.id
+      this.awayLogo = this.data.teams.away.logo
+      this.awayName = this.data.teams.away.name
+      this.awayScore = this.data.goals.away
+      this.awayId = this.data.teams.away.id
+      
+      this.statut = this.data.fixture.status.long
+      this.elapsed = this.data.fixture.status.elapsed
+      this.id = this.data.fixture.id.toString()
 
-    if (this.statut == "Match Finished") {
-      this.statut = "Terminé"
-      this.elapsed = this.datepipe.transform(this.data.fixture.date, 'dd/MM/yy') || ""
-    } else if (this.statut == "Not Started") {
-      this.statut = "À Venir"
-      this.elapsed = this.datepipe.transform(this.data.fixture.date, 'dd/MM/yy') || ""
-    } else if (this.statut == "Time to be defined") {
-      this.statut = "À Définir"
-      this.elapsed = "-"
-    } else {
-      this.elapsed += "\"";
+      if (this.statut == "Match Finished") {
+        this.statut = "Terminé"
+        this.elapsed = this.datepipe.transform(this.data.fixture.date, 'dd/MM/yy') || ""
+      } else if (this.statut == "Not Started") {
+        this.statut = "À Venir"
+        this.elapsed = this.datepipe.transform(this.data.fixture.date, 'dd/MM/yy') || ""
+      } else if (this.statut == "Time to be defined") {
+        this.statut = "À Définir"
+        this.elapsed = "-"
+      } else {
+        this.elapsed += "\"";
+      }
     }
-
   } 
 
-  getId():number {
-    return this.id;
-  }
 
   goToStat(){
    // console.log("gotToStats of fixture id = " + this.data.fixture.id)

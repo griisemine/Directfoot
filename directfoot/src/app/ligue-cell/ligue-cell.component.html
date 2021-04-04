@@ -31,8 +31,7 @@
     }
 </style>
 
-
-<div class="top-cell" routerLink="/team">
+<div class="top-cell" routerLink="/team" [queryParams]="{ id: id }">
     <p class="content-top-cell">{{rank}}</p>
     <div class="content-top-cell team-cell">
         <img class="logo" src="{{logo}}" alt="">

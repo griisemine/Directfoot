@@ -72,30 +72,15 @@
     <div class="wrapper">
       <a *ngFor="let num of tabInt">
         <div class="teamCell"><app-match-result [data]=responses[num]></app-match-result></div>
+        <div class="teamCell-right"></div>
       </a>
-      <div class="teamCell-right"></div>
+      <a *ngIf=" tabInt.length == 0 ">
+        <div class="teamCell"><app-match-result ></app-match-result></div>
+        <div class="teamCell teamCell-right"><app-match-result ></app-match-result></div>
+        <div class="teamCell"><app-match-result ></app-match-result></div>
+      </a>
     </div>
   
-    <br>
-    <br>
-    <br>
-    <br>
-    <p class="title" >Ligue</p>
-    <br>
-    <app-ligue-result [ligueID]="61"></app-ligue-result>
-  
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    
+    <app-ligue-result [ligueID]="61"></app-ligue-result>  
   </div>
   

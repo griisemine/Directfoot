@@ -32,8 +32,8 @@
     }
 
 </style>
-
-<div class="row-ligue" routerLink="/league">
+<h1 style="font-weight: bold;">Ligue Name {{ligueID}}</h1>
+<div class="row-ligue" routerLink="/league" [queryParams]="{ id: ligueID }">
     <div class="top-cell">
         <p class="content-top-cell">#</p>
         <p class="content-top-cell team-cell">Equipe</p>
@@ -50,4 +50,10 @@
     <a *ngFor="let num of tabInt">
         <app-ligue-cell [standing]=standings[num]></app-ligue-cell>
     </a>
+    <div *ngIf=" tabInt.length == 0">
+        <app-ligue-cell></app-ligue-cell>
+        <app-ligue-cell></app-ligue-cell>
+        <app-ligue-cell></app-ligue-cell>
+        <app-ligue-cell></app-ligue-cell>
+    </div>
 </div>

@@ -1,14 +1,14 @@
 
 
-<div class="card" routerLink="/match" [queryParams]="{ id: getId() }">
+<div class="card" routerLink="/match" [queryParams]="{ id: id }">
     <div class="left-row">
-        <div >
+        <div routerLink="/team" [queryParams]="{ id: homeId }">
             <img src="{{homeLogo}}" alt="" class="logo">
             <div class="div-equipe-name"> <a class="equipe-name">{{homeName}}</a> </div>
             <a class="score">{{homeScore}}</a>
         </div>
         <hr class="separator">
-        <div style="margin-bottom: 5px;">
+        <div style="margin-bottom: 5px;" routerLink="/team" [queryParams]="{ id: awayId }">
             <img src="{{awayLogo}}" alt="" class="logo">
             <div class="div-equipe-name"><a class="equipe-name">{{awayName}}</a></div>
             <a class="score">{{awayScore}}</a>

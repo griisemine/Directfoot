@@ -11,31 +11,33 @@ export class LigueCellComponent implements OnInit {
 
   rank = "1";
   logo = "https://media.api-sports.io/football/teams/9244.png"
-  name = "Paris SG"
+  name = "no_data"
   id = ""
-  points = "65"
-  played = "30"
-  win = "30"
-  draw = "0"
-  lose = "0"
-  for = "78"
-  against = "3"
-  goalsDiff = "75"
-  constructor() {   }
+  points = "-"
+  played = "-"
+  win = "-"
+  draw = "-"
+  lose = "-"
+  for = "-"
+  against = "-"
+  goalsDiff = "-"
+  constructor() {}
 
   ngOnInit(): void {
-    this.rank = this.standing.rank;
-    this.logo = this.standing.team.logo;
-    this.name = this.standing.team.name;
-    this.id = this.standing.team.id;
-    this.points = this.standing.points;
-    this.played = this.standing.all.played;
-    this.win = this.standing.all.win;
-    this.draw = this.standing.all.draw;
-    this.lose = this.standing.all.lose;
-    this.for = this.standing.all.goals.for;
-    this.against = this.standing.all.goals.against;
-    this.goalsDiff = this.standing.goalsDiff;
+    if(this.standing != null){
+      this.rank = this.standing.rank;
+      this.logo = this.standing.team.logo;
+      this.name = this.standing.team.name;
+      this.id = this.standing.team.id;
+      this.points = this.standing.points;
+      this.played = this.standing.all.played;
+      this.win = this.standing.all.win;
+      this.draw = this.standing.all.draw;
+      this.lose = this.standing.all.lose;
+      this.for = this.standing.all.goals.for;
+      this.against = this.standing.all.goals.against;
+     this.goalsDiff = this.standing.goalsDiff;
+    }
   }
   
 }

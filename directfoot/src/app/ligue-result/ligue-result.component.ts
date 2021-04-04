@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ligue-result',
@@ -9,35 +10,58 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LigueResultComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io";
-  constructor(private http: HttpClient ) { }
 
   @Input() ligueID!: number;
-
-  ngOnInit(): void {
-    //this.sendRequest();
-  }
-
   data!: Content;
   standings: Array<Standings> = [];
   tabInt: Array<number> = [];
+
+  constructor(private http: HttpClient , private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (this.ligueID == null)
+        this.ligueID = params['id'];
+    });
+   }
   
-  sendRequest (){
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-      
-    this.http.get(this.ROOT_URL + '/standings?league=' + this.ligueID + '&season=2020' ,{ headers , responseType: 'text' } )
-            .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
-    
+  ngOnInit(): void {
+    // Exceuter au chargement de la page
+    if ( this.ligueID != null ){
+      this.envoyerRequete( '/standings?league=' + this.ligueID + '&season=2020' );
+    }
+    console.log( "longueur = " + this.tabInt.length)
+
   }
 
+  /**
+   * Methode qui permet de parser les donnees recu
+   * dans une interface du type Content
+   * appliquer directement ces information dans le 
+   * html
+   * @param data jeu de donnee recu
+   */
   dataParser( data:Content ){
-    for( var i=0 ; i < data.response[0].league.standings[0].length ; i++ ){
-      this.standings[i] = data.response[0].league.standings[0][i];
-      console.log(data.response[0].league.standings[0][i]);
-      this.tabInt[i] = i;
+    // Parser si on a des resultat uniquement
+    if ( data.results > 0 ){
+      for( var i=0 ; i < data.response[0].league.standings[0].length ; i++ ){
+        this.standings[i] = data.response[0].league.standings[0][i];
+        console.log(data.response[0].league.standings[0][i]);
+        this.tabInt[i] = i;
+      }
     }
   }
+
+  /**
+   * Methode qui permet d'envoyer la requete
+   * au serveur avec les parametre voulu
+   * @param params les parametres de la requete
+   */
+     envoyerRequete ( params:string ){
+      const headers = new HttpHeaders()
+        .set('x-rapidapi-host', 'v3.football.api-sports.io')
+        .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
+      this.http.get(this.ROOT_URL + params ,{ headers , responseType: 'text' } )
+              .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+    }
 
 }
 
