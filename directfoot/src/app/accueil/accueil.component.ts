@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.css']
 })
+
 export class AccueilComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io";
@@ -15,13 +16,10 @@ export class AccueilComponent implements OnInit {
 
   responses: Array<Responses> = [];
   tabInt: Array<number> = [];
-  caca ="caca pipi"
-
+  
   ngOnInit(): void {
     this.envoyerRequete();
   }
-
-  data!: Content;
   
   /**
    * Methode qui permet d'envoyer la requete
@@ -36,10 +34,8 @@ export class AccueilComponent implements OnInit {
     this.http.get(this.ROOT_URL + '/fixtures?league=61&season=2020' ,{ headers , responseType: 'text' } )
             .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
     */
-
     //https://v3.football.api-sports.io/fixtures?league=61&season=2020&round=Regular Season - 32"
-      this.http.get('https://samymahi.eu/accueil_current_saison.json' ,{  responseType: 'text' } )
-            .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+      this.http.get('https://samymahi.eu/accueil.json' , {  responseType: 'text' } ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
   }
 
   /**
@@ -50,6 +46,7 @@ export class AccueilComponent implements OnInit {
    * @param data jeu de donnee recu
    */
   dataParser( data:Content ){
+    console.log("Je commence fini")
      for( var i=0 ; i < data.results ; i++ ){
       this.responses[i] = data.response[i];
       this.tabInt[i] = i;

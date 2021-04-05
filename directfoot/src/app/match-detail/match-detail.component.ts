@@ -12,7 +12,9 @@ export class MatchDetailComponent implements OnInit {
   fixtureID = "";
 
   tabInt: Array<number> = [];
-  response!:Array<Responses>;
+  response!:Array<ResponsesMatchDetail>;
+
+  playerList:Array<ResponsesMatchPlayer> = []; 
 
   readonly ROOT_URL = "https://v3.football.api-sports.io";
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) {
@@ -23,27 +25,29 @@ export class MatchDetailComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.fixtureID != "") {
-      this.sendRequest()
+      this.reqMatchDetail( this.fixtureID )
+      this.reqPlayerMatch( this.fixtureID )
     }
   }
 
-
-  sendRequest(){
+  /**
+   * Recuperer les details d'un match en particulier
+   */
+  reqMatchDetail(fixId:string){
     const headers = new HttpHeaders()
       .set('x-rapidapi-host', 'v3.football.api-sports.io')
       .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-      
-   // this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } )
-   //        .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
-    this.http.get('https://samymahi.eu/match.json' ,{  responseType: 'text' } )
-    .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+     this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + fixId ,{ headers , responseType: 'text' } ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  );
+    //this.http.get('https://samymahi.eu/match.json' ,{  responseType: 'text' } ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  );
   }
 
-  dataParser( data:Content ){
+  /**
+   * Parser match detail
+   * @param data 
+   */
+  reqMatchDetailParser( data:ContentMatchDetail ){
     this.response = data.response
-
     for( var i=0 ; i < data.response[0].statistics.length ; i++ ){
-      this.response[0].statistics[0].type
       this.tabInt[i] = i;
       if (this.response[0].statistics[i].value == null) {
         this.response[0].statistics[i].value = "0"
@@ -53,18 +57,34 @@ export class MatchDetailComponent implements OnInit {
       }
       this.response[0].team.id
     } 
-
   }
 
+  reqPlayerMatch(fixId:string){
+    const headers = new HttpHeaders()
+      .set('x-rapidapi-host', 'v3.football.api-sports.io')
+      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
+    this.http.get(this.ROOT_URL + '/fixtures/lineups?fixture=' + fixId ,{ headers , responseType: 'text' } ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  );
+    //this.http.get('https://samymahi.eu/match-detail-player.json' ,{  responseType: 'text' } ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  );
+  }
+
+  /**
+   * Parser match player
+   * @param data 
+   */
+  reqMatchPlayerParser( data:ContentMatchPlayer ){
+    console.log(data)
+    this.playerList = data.response;
+    this.playerList[0].startXI[0].player.name
+  }
 }
 
-interface Content {
+interface ContentMatchDetail {
   get:string;
-  response:Array<Responses>;
+  response:Array<ResponsesMatchDetail>;
   results:number;
 }
 
-interface Responses {
+interface ResponsesMatchDetail {
   team:{
     id:string,
     name:string,
@@ -76,4 +96,36 @@ interface Responses {
 interface Statistics {
   type:string,
   value:string
+}
+
+
+
+interface ContentMatchPlayer {
+  get:string,
+  results:number,
+  response:Array<ResponsesMatchPlayer>
+}
+
+interface ResponsesMatchPlayer {
+  team:{
+    id:string,
+    name:string,
+    logo:string
+  },
+  coach:{
+    id:string,
+    name:string
+  },
+  formation:string,
+  startXI:Array<Players>,
+  substitutes:Array<Players>
+}
+
+interface Players {
+  player:{
+    id:string,
+    name:string,
+    number:string,
+    pos:string
+  }
 }

@@ -1,73 +1,10 @@
-<style>
 
-    @media only screen and (max-width:800px){
-  
-      .title{
-        font-size: 2.2em;
-        font-weight: bold;
-        text-align: center;
-      }
-  
-      .teamCell {
-        width: 80%;
-        display: block;
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-bottom: 40px;
-      }
-    }
-  
-    @media  (min-width:800px) and (max-width:1200px){
-  
-      .title{
-      font-size: 2.2em;
-      font-weight: bold;
-    }
-  
-      .wrapper {
-        display: grid;
-        margin-left: auto;
-        margin-right: auto;
-      }
-  
-      .teamCell {
-        grid-column: 1;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 60px;
-      }
-  
-      .teamCell-right {
-        grid-column: 2;
-        
-      }
-    }
-  
-    @media only screen and (min-width:1200px){
-        .title{
-          font-size: 2.2em;
-          font-weight: bold;
-        }
-  
-        .teamCell {
-          width: 33%; 
-          display: inline-block; 
-          margin-bottom: 40px;
-        }
-    }
-
-    a {
-      
-    }
-  
-  </style>
   <div class="container">
     <div class="row" style="margin-bottom: 50px;">
       <app-search></app-search>
       <app-ligue-accueil></app-ligue-accueil>
     </div>
-    <p class="title" >Aujourd'hui</p>
+    <p class="title" >À Venir ?</p>
         
     <div class="wrapper">
       <a *ngFor="let num of tabInt">
@@ -75,7 +12,6 @@
       </a>
       <div class="teamCell-right"></div>
     </div>
-  
     <app-ligue-result [ligueID]="61"></app-ligue-result>  
   </div>
   

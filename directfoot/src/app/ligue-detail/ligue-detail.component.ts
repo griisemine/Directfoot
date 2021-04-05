@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ligue-detail',
@@ -19,23 +19,28 @@ export class LigueDetailComponent implements OnInit {
   id = ""
   round = ""
   
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute , private changeDetector: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute , private changeDetector: ChangeDetectorRef,private router:Router ) {
     this.activatedRoute.queryParams.subscribe(params => {
         this.id = params['id'];
+        console.log(params['id'])
         this.round = params['rounds'];
+        console.log(params['rounds'])
     });
   }
 
   onChange(event:any){
     console.log(event.target.value)
-    this.envoyerRequeteMatch(event.target.value)
-    this.changeDetector.detectChanges();
+    this.router.navigate(['/league'],{ queryParams: { id:this.id, rounds:event.target.value} } );
+    window.location.reload();
   }
 
   ngOnInit(): void {
+    console.log("ON INIT")
     this.envoyerRequete()
-    this.envoyerRequeteMatch("Regular Season - 1")
-    this.changeDetector.detectChanges();
+    if ( this.round == "")
+      this.envoyerRequeteMatch("Regular Season - 1")
+    else 
+      this.envoyerRequeteMatch(this.round) 
   }
 
   envoyerRequete( ){
@@ -43,8 +48,7 @@ export class LigueDetailComponent implements OnInit {
       .set('x-rapidapi-host', 'v3.football.api-sports.io')
       .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
       
-   // this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } )
-   //        .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+   // this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
    
     this.http.get('https://samymahi.eu/rounds_list.json' ,{  responseType: 'text' } )
     .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
