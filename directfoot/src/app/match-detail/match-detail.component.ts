@@ -33,9 +33,10 @@ export class MatchDetailComponent implements OnInit {
       .set('x-rapidapi-host', 'v3.football.api-sports.io')
       .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
       
-    this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } )
-            .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
-    
+   // this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } )
+   //        .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+    this.http.get('https://samymahi.eu/match.json' ,{  responseType: 'text' } )
+    .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
   }
 
   dataParser( data:Content ){

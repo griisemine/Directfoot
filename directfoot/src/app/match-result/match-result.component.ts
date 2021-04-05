@@ -37,7 +37,6 @@ export class MatchResultComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data != null){
-      console.log(this.data);
       this.homeLogo = this.data.teams.home.logo
       this.homeName = this.data.teams.home.name
       this.homeScore = this.data.goals.home

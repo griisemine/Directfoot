@@ -1,12 +1,73 @@
 <style>
   .select-form{
-    margin: 3px 0 0 0;
+    margin: 50px 0px 50px 0;
     padding: 6px; 
-    width: 260px; 
+    width: auto; 
     font-size: 3em; 
     background: none;
     -webkit-appearance: none;
   }
+
+  @media only screen and (max-width:800px){
+  
+  .title{
+    font-size: 2.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .teamCell {
+    width: 80%;
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 40px;
+  }
+}
+
+@media  (min-width:800px) and (max-width:1200px){
+
+  .title{
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+  .wrapper {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .teamCell {
+    grid-column: 1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+  }
+
+  .teamCell-right {
+    grid-column: 2;
+    
+  }
+}
+
+@media only screen and (min-width:1200px){
+    .title{
+      font-size: 2.2em;
+      font-weight: bold;
+    }
+
+    .teamCell {
+      width: 33%; 
+      display: inline-block; 
+      margin-bottom: 40px;
+    }
+}
+
+a {
+  
+}
 
 </style>
 
@@ -16,11 +77,17 @@
     </div>
     <app-ligue-result></app-ligue-result>
 
-    <select class="select-form" >
-      <option selected>Journée 22</option>
-      <option value="1">Journée 22</option>
-      <option value="2">Journée 22</option>
-      <option value="3">Journée 22</option>
+    <select class="select-form" (change)="onChange($event)">
+      <option *ngFor="let num of tabInt"  value="{{rounds[num]}}" >
+        {{rounds[num]}}
+      </option>
     </select>
+
+    <div class="wrapper">
+      <a *ngFor="let num of tabIntReponse">
+        <div class="teamCell"><app-match-result [data]=dataMatch.response[num]></app-match-result></div>
+      </a>
+      <div class="teamCell-right"></div>
+    </div>
 
 </div>
