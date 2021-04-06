@@ -100,10 +100,15 @@
     </div>
 
       <div class="match-detail-container">
-          <div class="score">
+          <div class="score" style="border: solid 1px red;">
               <img class="logo" src="https://media.api-sports.io/football/teams/81.png" alt="" routerLink="/team" [queryParams]="{ id: teamID }">
-              <p class="teamName" routerLink="/team" [queryParams]="{ id: teamID }">NOM EQUIPE</p>
+              <p class="teamName" routerLink="/team" [queryParams]="{ id: teamID }">NOM EQUIPE {{teamID}}</p>
+          </div>
+  
+          <div style="grid-column: 1 / 4; grid-row: 2; border: solid 1px red;">
           </div>
       </div>
+
+      
 </div>
 

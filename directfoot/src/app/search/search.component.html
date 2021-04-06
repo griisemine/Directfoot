@@ -1,177 +1,95 @@
 <style>
-    input {
-        margin: 0 auto;
-        border-radius: 10px;
-        height: auto;
-        width: 60%;
-        margin-left: 20%;
-        margin-right: 20%;
-        margin-top: 40px;
-        background-color: black;
-        border: solid 2px rgba(255, 255, 255,0.2);
-        color: white;
-        padding-left: 10px;
-        font-size: 1.5em;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    ::placeholder {
-        color: white;
-    }
-
-
-    
+input {
+  margin: 0 auto;
+  border-radius: 10px;
+  height: auto;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 40px;
+  background-color: black;
+  border: solid 2px rgba(255, 255, 255,0.2);
+  color: white;
+  padding-left: 10px;
+  font-size: 1.5em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.output-open{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
 .output {
-  list-style: none;
-  width: 100%;
-  min-height: 0px;
-  border-top: 0 !important;
-  color: #767676;
-  font-size: .75em;
-  transition: min-height 0.2s;
   position: absolute;
-  z-index: 5;
+  list-style: none;
+  border: solid 1px rgba(255, 255, 255,0.2);
+  border-top: 0 !important;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 60%;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  z-index: 1;
+  padding: 0;
+}
+.output-content {
+  font-size: 1.5em;
+  margin: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.output, #search-bar {
-  background: #fff;
-  border: 1px solid #767676;
+.output-content:hover{
+  background-color: rgba(0, 102, 255, 0.685);
+  transition-duration: 0.2s;
 }
 
-.prediction-item {
-  padding: .5em .75em;
-  transition: color 0.2s, background 0.2s;
+.logo {
+  height: auto;
+  display: inline-block;
+  max-width: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: top;
 }
 
-.output:hover .focus {
-  background: #fff;
-  color: #767676;
+hr {
+  margin: 0 0;
+  opacity: 0.1;
+  margin-top: 10px;
 }
 
-.prediction-item:hover, .focus,
-.output:hover .focus:hover {
-  background: #ddd;
-  color: #333;
+a {
+  color: white;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: top;
 }
+
 </style>
 
-<input id="search-bar"  type="text" placeholder="Rechercher" (input)="print($event)" onchange="" > 
-
-<ul class="output" style="display: none;">
-    
+<div style="position: relative;">
+  <input class="output-open" type="text" placeholder="Rechercher" (input)="print($event)" onchange="" > 
+  <ul class="output" *ngIf=" statut ">   
+    <div *ngFor=" let result of matchResultat ">
+      <li class="output-content" routerLink="/team" [queryParams]="{ id: result.id }">
+        <div >
+          <img src="{{result.logo}}" alt="" class="logo">
+          <a> {{result.name}}</a>
+        </div>
+      </li>
+    </div>
 </ul>
+</div>
 
-<script>
-  $(document).ready(function(){
-  
-  var $terms = [
-    'search',
-    'test',
-    'css',
-    'apple',
-    'bear',
-    'cat',
-    'crabapple',
-    'creep',
-    'czar',
-    'danger',
-    'dominant',
-    'doppler',
-    'everclear',
-    'evangelism',
-    'frodo'
-     ].sort(),
-     $return = [];
-    
-  function strInArray(str, strArray) {
-    for (var j=0; j<strArray.length; j++) {
-      if (strArray[j].match(str) && $return.length < 5) {
-        var $h = strArray[j].replace(str, '<strong>'+str+'</strong>');
-        $return.push('<li class="prediction-item"><span class="prediction-text">' + $h + '</span></li>');
-      }
-    }
-  }
-    
-  function nextItem(kp) {
-    if ( $('.focus').length > 0 ) {
-      var $next = $('.focus').next(),
-          $prev = $('.focus').prev();
-    }
-    
-    if ( kp == 38 ) { // Up
-    
-      if ( $('.focus').is(':first-child') ) {
-        $prev = $('.prediction-item:last-child');
-      }
-      
-      $('.prediction-item').removeClass('focus');
-      $prev.addClass('focus');
-      
-    } else if ( kp == 40 ) { // Down
-    
-      if ( $('.focus').is(':last-child') ) {
-        $next = $('.prediction-item:first-child');
-      }
-      
-      $('.prediction-item').removeClass('focus');
-      $next.addClass('focus');
-    }
-  }
-  
-  $(function(){  
-    $('#search-bar').keydown(function(e){
-      $key = e.keyCode;
-      if ( $key == 38 || $key == 40 ) {
-        nextItem($key);
-        return;
-      }
-      
-      setTimeout(function() {
-        var $search = $('#search-bar').val();
-        $return = [];
-        
-        strInArray($search, $terms);
-        
-        if ( $search == '' || ! $('input').val ) {
-          $('.output').html('').slideUp();
-        } else {
-          $('.output').html($return).slideDown();
-        }
-    
-        $('.prediction-item').on('click', function(){
-          $text = $(this).find('span').text();
-          $('.output').slideUp(function(){
-            $(this).html('');
-          });
-          $('#search-bar').val($text);
-        });
-        
-        $('.prediction-item:first-child').addClass('focus');
-        
-      }, 50);
-    });
-  });
-    
-    $('#search-bar').focus(function(){
-      if ( $('.prediction-item').length > 0 ) {
-        $('.output').slideDown();
-      }
-      
-      $('#searchform').submit(function(e){
-        e.preventDefault();
-        $text = $('.focus').find('span').text();
-        $('.output').slideUp();
-        $('#search-bar').val($text);
-        $('input').blur();
-      });
-    });
-    
-    $('#search-bar').blur(function(){
-      if ( $('.prediction-item').length > 0 ) {
-        $('.output').slideUp();
-      }
-    });
-    
-  });
-</script>
+
