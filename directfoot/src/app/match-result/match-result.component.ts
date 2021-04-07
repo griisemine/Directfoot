@@ -34,6 +34,8 @@ export class MatchResultComponent implements OnInit {
   elapsed= "-";
   statut = "no_data"
   id = ""
+  leagueID = ""
+  season = ""
 
   ngOnInit(): void {
     if(this.data != null){
@@ -50,6 +52,8 @@ export class MatchResultComponent implements OnInit {
       this.statut = this.data.fixture.status.long
       this.elapsed = this.data.fixture.status.elapsed
       this.id = this.data.fixture.id.toString()
+      this.leagueID = this.data.league.id
+      this.season = this.data.league.season
 
       if (this.statut == "Match Finished") {
         this.statut = "Terminé"
@@ -91,6 +95,14 @@ interface Responses {
       elapsed:string
     }
 
+  },
+  league:{
+    id:string,
+    name:string,
+    country:string,
+    logo:string,
+    flag:string,
+    season:string
   },
   goals:{
     away:string,

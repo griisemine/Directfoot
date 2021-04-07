@@ -32,11 +32,11 @@ export class SearchComponent implements OnInit {
     for( var i = 0 ; i < this.teamList.length ; i++ ){
       if( this.teamList[i].teams.away.name.toLowerCase().indexOf(chaine.toLowerCase()) != -1 ){
         if( this.findinMatchResultat( this.teamList[i].teams.away.name ) == false )
-          this.matchResultat.push( { logo:this.teamList[i].teams.away.logo , name:this.teamList[i].teams.away.name , id:this.teamList[i].teams.away.id} );
+          this.matchResultat.push( { logo:this.teamList[i].teams.away.logo , name:this.teamList[i].teams.away.name , id:this.teamList[i].teams.away.id, leagueID:this.teamList[i].league.id, season:this.teamList[i].league.season} );
       }
       if( this.teamList[i].teams.home.name.toLowerCase().indexOf(chaine.toLowerCase()) != -1 ){
         if( this.findinMatchResultat( this.teamList[i].teams.home.name ) == false )
-          this.matchResultat.push( { logo:this.teamList[i].teams.home.logo , name:this.teamList[i].teams.home.name  , id:this.teamList[i].teams.home.id} );
+          this.matchResultat.push( { logo:this.teamList[i].teams.home.logo , name:this.teamList[i].teams.home.name  , id:this.teamList[i].teams.home.id, leagueID:this.teamList[i].league.id, season:this.teamList[i].league.season} );
       }
     }
     this.matchResultat = Array.from(this.matchResultat)
@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
       //https://v3.football.api-sports.io/fixtures?league=61&season=2020&round=Regular Season - 32"
         this.http.get('https://samymahi.eu/accueil.json' , {  responseType: 'text' } ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
     }
-  
+    
     /**
      * Methode qui permet de parser les donnees recu
      * dans une interface du type Content
@@ -84,7 +84,9 @@ export class SearchComponent implements OnInit {
 interface Search {
   logo:string,
   name:string,
-  id:string
+  id:string,
+  leagueID:string,
+  season:string
 }
 
 interface Content {
@@ -102,6 +104,14 @@ interface Responses {
       elapsed:string
     }
 
+  },
+  league:{
+    id:string,
+    name:string,
+    country:string,
+    logo:string,
+    flag:string,
+    season:string
   },
   goals:{
     away:string,

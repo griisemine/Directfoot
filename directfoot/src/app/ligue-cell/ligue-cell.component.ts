@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LigueCellComponent implements OnInit {
 
   @Input() standing!:Standings
+  @Input() league!:String
+  @Input() season!:String
 
   rank = "1";
   logo = "https://media.api-sports.io/football/teams/9244.png"
@@ -36,7 +38,7 @@ export class LigueCellComponent implements OnInit {
       this.lose = this.standing.all.lose;
       this.for = this.standing.all.goals.for;
       this.against = this.standing.all.goals.against;
-     this.goalsDiff = this.standing.goalsDiff;
+      this.goalsDiff = this.standing.goalsDiff;
     }
   }
   

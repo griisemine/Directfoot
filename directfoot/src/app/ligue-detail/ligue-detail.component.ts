@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './ligue-detail.component.html',
   styleUrls: ['./ligue-detail.component.css']
 })
-export class LigueDetailComponent implements OnInit {
+export class LigueDetailComponent implements OnInit, OnChanges {
 
   data!:ContentLeague
   dataMatch!: Content
@@ -27,21 +27,27 @@ export class LigueDetailComponent implements OnInit {
         console.log(params['rounds'])
     });
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("CA CHANGE")
+  }
 
   onChange(event:any){
     console.log(event.target.value)
-    this.router.navigate(['/league'],{ queryParams: { id:this.id, rounds:event.target.value} } );
-    window.location.reload();
+    this.tabIntReponse = [];
+    this.envoyerRequeteMatch(event.target.value)
+    //this.router.navigate(['/league'],{ queryParams: { id:this.id, rounds:event.target.value} } );
   }
 
   ngOnInit(): void {
     console.log("ON INIT")
     this.envoyerRequete()
-    if ( this.round == "")
+    if ( this.round == null )
       this.envoyerRequeteMatch("Regular Season - 1")
     else 
-      this.envoyerRequeteMatch(this.round) 
+      this.envoyerRequeteMatch(this.round)
   }
+
+
 
   envoyerRequete( ){
     const headers = new HttpHeaders()
@@ -98,10 +104,6 @@ interface ContentLeague{
   results:number,
   response: Array<string>
 }
-
-
-
-
 
 interface Content {
   get:string;

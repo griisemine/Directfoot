@@ -16,6 +16,7 @@ export class LigueResultComponent implements OnInit {
   standings: Array<Standings> = [];
   tabInt: Array<number> = [];
   ligueName = ""
+  season = ""
 
   constructor(private http: HttpClient , private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -41,6 +42,7 @@ export class LigueResultComponent implements OnInit {
   dataParser( data:Content ){
     // Parser si on a des resultat uniquement
     if ( data.results > 0 ){
+      this.season = data.response[0].league.season;
       this.ligueName = data.response[0].league.name ;
       for( var i=0 ; i < data.response[0].league.standings[0].length ; i++ ){
         this.standings[i] = data.response[0].league.standings[0][i];
@@ -58,12 +60,12 @@ export class LigueResultComponent implements OnInit {
       const headers = new HttpHeaders()
         .set('x-rapidapi-host', 'v3.football.api-sports.io')
         .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-        /*
+        
       this.http.get(this.ROOT_URL + params ,{ headers , responseType: 'text' } )
               .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
-              */
-      this.http.get('https://samymahi.eu/ligue.json' ,{  responseType: 'text' } )
-              .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+              
+     // this.http.get('https://samymahi.eu/ligue.json' ,{  responseType: 'text' } )
+     //         .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
     }
 
 }

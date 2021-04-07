@@ -52,6 +52,6 @@
     </div>
     <hr class="separator">
     <div *ngFor="let num of tabInt">
-        <app-ligue-cell [standing]=standings[num]></app-ligue-cell>
+        <app-ligue-cell [standing]=standings[num] [league]=ligueID.toString()  [season]=season></app-ligue-cell>
     </div>
 </div>
