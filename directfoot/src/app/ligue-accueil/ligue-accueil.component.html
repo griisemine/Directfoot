@@ -1,39 +1,17 @@
-<style>
-    .bloc{
-        background-color: rgb(63, 63, 63);
-        margin-left: 1.5%;
-        margin-right: 1.5%;
-        padding: 5px;
-        border-radius: 5px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .logo {
-        width: 50px;
-        max-height: 50px;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        border-radius: 50%;
-        border: solid 2px white;
-    }
-</style>
-
-<div style="margin-left: 30%; margin-right: 30%; margin-top: 40px;">
-    <div class="col-md-2 bloc" routerLink="/league" [queryParams]="{ id: 61 }">
+<div class="bloc">
+    <div style="grid-column: 1 / 2;" routerLink="/league" [queryParams]="{ id: 61 }">
         <img class="logo" src="https://media.api-sports.io/football/leagues/61.png" alt="">
     </div>
-    <div class="col-md-2 bloc" routerLink="/league" [queryParams]="{ id: 62 }">
-        <img class="logo" src="https://media.api-sports.io/football/teams/9244.png" alt="">
+    <div style="grid-column: 2 / 3;" routerLink="/league" [queryParams]="{ id: 39 }">
+        <img class="logo" src="https://media.api-sports.io/football/leagues/39.png" alt="">
     </div>
-    <div class="col-md-2 bloc" routerLink="/league" [queryParams]="{ id: 63 }">
-        <img class="logo" src="https://media.api-sports.io/football/teams/9244.png" alt="">
+    <div style="grid-column: 3 / 4;" routerLink="/league" [queryParams]="{ id: 135 }">
+        <img class="logo" src="https://media.api-sports.io/football/leagues/135.png" alt="">
     </div>
-    <div class="col-md-2 bloc" routerLink="/league" [queryParams]="{ id: 64 }">
-        <img class="logo" src="https://media.api-sports.io/football/teams/9244.png" alt="">
+    <div style="grid-column: 4 / 5;" routerLink="/league" [queryParams]="{ id: 140 }">
+        <img class="logo" src="https://media.api-sports.io/football/leagues/140.png" alt="">
     </div>
-    <div class="col-md-2 bloc" routerLink="/league" [queryParams]="{ id: 65 }">
-        <img class="logo" src="https://media.api-sports.io/football/teams/9244.png" alt="">
+    <div style="grid-column: 5 / 6;" routerLink="/league" [queryParams]="{ id: 78 }">
+        <img class="logo" src="https://media.api-sports.io/football/leagues/78.png" alt="">
     </div>
-  </div>
+</div>

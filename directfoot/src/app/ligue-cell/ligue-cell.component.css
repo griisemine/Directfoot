@@ -1,0 +1,34 @@
+.top-cell {
+    padding-left: 5%;
+    margin: 0px;
+}
+
+.content-top-cell{
+    display: inline-block;
+    width: 5.5%;
+    margin: auto;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+.team-cell {
+    width: 50%;
+}
+
+.logo {
+    max-width: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    min-height: 30px;
+}
+
+.teamName {
+    margin: auto;
+    display: inline-block;
+    margin-left: 3%;
+    vertical-align: middle;
+}
+
+p {
+    text-align: center;
+}

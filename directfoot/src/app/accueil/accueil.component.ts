@@ -15,7 +15,7 @@ export class AccueilComponent implements OnInit {
   constructor(private http: HttpClient , public datepipe: DatePipe ) {}
 
   responses: Array<Responses> = [];
-  tabInt: Array<number> = [];
+  ligueDefault = "61"
   
   ngOnInit(): void {
     this.envoyerRequete();
@@ -31,7 +31,7 @@ export class AccueilComponent implements OnInit {
      const headers = new HttpHeaders()
       .set('x-rapidapi-host', 'v3.football.api-sports.io')
       .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-    this.http.get(this.ROOT_URL + '/fixtures?league=61&season=2020' ,{ headers , responseType: 'text' } )
+    this.http.get(this.ROOT_URL + '/fixtures?league=61&season=2020&last=10' ,{ headers , responseType: 'text' } )
             .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
     
     //https://v3.football.api-sports.io/fixtures?league=61&season=2020&round=Regular Season - 32"
@@ -49,7 +49,6 @@ export class AccueilComponent implements OnInit {
     console.log("Je commence fini")
      for( var i=0 ; i < data.results ; i++ ){
       this.responses[i] = data.response[i];
-      this.tabInt[i] = i;
     } 
   }
 }

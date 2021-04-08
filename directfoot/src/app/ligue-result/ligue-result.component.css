@@ -1,0 +1,35 @@
+.row-ligue{
+    min-width: 500px;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    height: auto;
+    background-color: rgb(63, 63, 63);;
+    border-radius: 15px;
+    font-size: 1.3em;
+    padding-top: 10px;
+}
+
+.top-cell {
+    padding-left: 5%;
+    margin: 0px;
+}
+
+.content-top-cell{
+    display: inline-block;
+    width: 5.5%;
+}
+
+.team-cell {
+    width: 50%;
+}
+
+.separator {
+    opacity: 0.3;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+}

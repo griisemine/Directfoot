@@ -11,7 +11,7 @@ export class LigueResultComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io";
 
-  @Input() ligueID!: number;
+  @Input() ligueID!: string;
   data!: Content;
   standings: Array<Standings> = [];
   tabInt: Array<number> = [];

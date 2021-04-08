@@ -121,6 +121,14 @@ interface Responses {
     }
 
   },
+  league:{
+    id:string,
+    name:string,
+    country:string,
+    logo:string,
+    flag:string,
+    season:string
+  },
   goals:{
     away:string,
     home:string

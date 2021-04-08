@@ -1,17 +1,16 @@
-
   <div class="container">
     <div class="row" style="margin-bottom: 50px;">
       <app-search></app-search>
       <app-ligue-accueil></app-ligue-accueil>
     </div>
-    <p class="title" >À Venir ?</p>
+    <p class="title" >Dernière Confrontation</p>
         
     <div class="wrapper">
-      <a *ngFor="let num of tabInt">
-        <div class="teamCell"><app-match-result [data]=responses[num]></app-match-result></div>
+      <a *ngFor="let response of responses">
+        <div class="teamCell"><app-match-result [data]=response></app-match-result></div>
       </a>
       <div class="teamCell-right"></div>
     </div>
-    <app-ligue-result [ligueID]="61"></app-ligue-result>  
+    <app-ligue-result [ligueID]=ligueDefault></app-ligue-result>  
   </div>
-  
+  <br>
