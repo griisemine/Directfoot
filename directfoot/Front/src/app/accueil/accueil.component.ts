@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './../services/api.service';
 
 @Component({
   selector: 'app-accueil',
@@ -12,13 +13,17 @@ export class AccueilComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io";
 
-  constructor(private http: HttpClient , public datepipe: DatePipe ) {}
+  constructor(private apiService: ApiService, private http: HttpClient , public datepipe: DatePipe ) {}
 
   responses: Array<Responses> = [];
   ligueDefault = "61"
-  
+
+
   ngOnInit(): void {
     this.envoyerRequete();
+    this.apiService.GetUniqueMatch("1").subscribe( res => {
+      console.log(res)
+    })
   }
   
   /**
