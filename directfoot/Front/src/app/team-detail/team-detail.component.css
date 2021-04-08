@@ -1,0 +1,120 @@
+@media only screen and (max-width:800px){
+  
+    .title{
+      font-size: 2.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .teamCell {
+      width: 80%;
+      display: block;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-bottom: 40px;
+    }
+  }
+
+  @media  (min-width:800px) and (max-width:1200px){
+
+    .title{
+    font-size: 2.2em;
+    font-weight: bold;
+  }
+
+    .wrapper {
+      display: grid;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .teamCell {
+      grid-column: 1;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 60px;
+    }
+
+    .teamCell-right {
+      grid-column: 2;
+      
+    }
+  }
+
+  @media only screen and (min-width:1200px){
+      .title{
+        font-size: 2.2em;
+        font-weight: bold;
+      }
+
+      .teamCell {
+        width: 33%; 
+        display: inline-block; 
+        margin-bottom: 40px;
+      }
+  }
+
+  .match-detail-container{
+    background-color: rgb(23, 23, 23);
+    padding: 20px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    align-items: center;
+}
+
+img.myTeam {
+    max-width: 50%;
+    min-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.myTeam {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    display: grid; 
+}
+
+p.myTeam {
+    margin: 0;
+    margin-top: 15px;
+    font-size: 2em;
+    font-weight: 500;
+    text-align: center;
+}
+
+p.myLigue {
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0.5;
+}
+
+div.statistique{
+    grid-column: 1 / 4; 
+    background-color: rgb(34, 34, 34);
+    border-radius: 0px;
+    display: grid;
+    margin-top: 20px;
+}
+
+.inner-statistique {
+    text-align: center; 
+    padding: 10px;
+    background-color: rgb(23, 23, 23);
+    border-radius: 5px;
+    margin: 1px;
+}
+
+.bg-green {
+    background-color: rgba(85, 196, 107, 0.5);
+}
+
+.bg-gray {
+    background-color: rgba(63, 63, 63, 0.5);
+}
+

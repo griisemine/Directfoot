@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row" style="margin-bottom: 50px;">
+        <app-search></app-search>
+    </div>
+    <div class="match-detail-container">
+        <div class="teamHome">
+            <img class="logo" src="{{response[0].team.logo}}" alt="" routerLink="/team" [queryParams]="{ id: response[0].team.id }">
+            <p class="teamName" routerLink="/team" [queryParams]="{ id: response[0].team.id }">{{response[0].team.name}}</p>
+        </div>
+        <div class="score">
+            <p class="score">{{score[0]}} - {{score[1]}}</p>
+        </div>
+        <div class="teamAway">
+            <img class="logo" src="{{response[1].team.logo}}" alt="" routerLink="/team" [queryParams]="{ id: response[1].team.id }">
+            <p class="teamName" routerLink="/team" [queryParams]="{ id: response[1].team.id }">{{response[1].team.name}}</p>
+        </div>
+        <div class="stats">
+            <a style="all: unset;" *ngFor="let num of tabInt">
+                <div class="stats-left"><p class="stats">{{response[0].statistics[num].value}}</p></div>
+                <div class="stats-middle"><p class="stats">{{response[0].statistics[num].type}}</p></div>
+                <div class="stats-right"><p class="stats">{{response[1].statistics[num].value}}</p></div>
+            </a>
+        </div>
+        <div class="team-player">
+            <div class="team-player-left">
+                <div class="team-player-content" >
+                    <div *ngFor=" let num of [0,1,2,3,4,5,6,7,8,9,10] ">
+                        <p class="number">{{playerList[0].startXI[num].player.number}}</p>
+                        <p class="name">{{playerList[0].startXI[num].player.name}}</p>
+                        <p class="poste">{{ playerList[0].startXI[num].player.pos }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-player-right">
+                <div class="team-player-content" >
+                    <div *ngFor=" let num of [0,1,2,3,4,5,6,7,8,9,10] ">
+                        <p class="number">{{playerList[1].startXI[num].player.number}}</p>
+                        <p class="name">{{playerList[1].startXI[num].player.name}}</p>
+                        <p class="poste">{{ playerList[1].startXI[num].player.pos }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>
+
+<br>
+<br>
+
+

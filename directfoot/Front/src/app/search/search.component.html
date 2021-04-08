@@ -1,0 +1,16 @@
+
+<div style="position: relative;">
+  <input class="output-open" type="text" placeholder="Rechercher" (input)="print($event)" onchange="" > 
+  <ul class="output" *ngIf=" statut ">   
+    <div *ngFor=" let result of matchResultat ">
+      <li class="output-content" routerLink="/team" [queryParams]="{ id: result.id ,  league:result.leagueID , season:result.season }">
+        <div >
+          <img src="{{result.logo}}" alt="" class="logo">
+          <a> {{result.name}}</a>
+        </div>
+      </li>
+    </div>
+</ul>
+</div>
+
+
