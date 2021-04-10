@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-match-detail',
@@ -12,54 +13,49 @@ export class MatchDetailComponent implements OnInit {
   fixtureID = "";
 
   tabInt: Array<number> = [];
-  response!:Array<ResponsesMatchDetail>;
+  response!:Array<any>;
   score = ["",""]
 
-  playerList:Array<ResponsesMatchPlayer> = []; 
+  playerList:Array<any> = []; 
 
   readonly ROOT_URL = "https://v3.football.api-sports.io";
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) {
+  constructor(private apiService: ApiService, private http: HttpClient, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
         this.fixtureID = params['id'];
     });
   }
 
   ngOnInit(): void {
+    this.getData();
+  }
+
+
+  /**
+   * Recuperer toute les donnees
+   */
+  getData(){
     if (this.fixtureID != "") {
-      this.reqMatchDetail( this.fixtureID )
-      this.reqPlayerMatch( this.fixtureID )
-      this.reqMatchScore ( this.fixtureID )
+      //this.apiService.sendRequest('/fixtures/statistics?fixture=' + this.fixtureID ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  ); #UNCOMMENT
+      //this.apiService.sendRequest('/fixtures/lineups?fixture=' + this.fixtureID ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  ); #UNCOMMENT
+      //this.apiService.sendRequest('/fixtures?id=' + this.fixtureID ).subscribe( data =>  this.reqMatchScoreParser( JSON.parse(data) )  ); #UNCOMMENT
     }
   }
 
-  reqMatchScore(fixId:string){
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-     this.http.get(this.ROOT_URL + '/fixtures?id=' + fixId ,{ headers , responseType: 'text' } ).subscribe( data =>  this.reqMatchScoreParser( JSON.parse(data) )  );
-  }
-
-  reqMatchScoreParser( data: ScoreContent ){
+  /**
+   * parser les donnes pour le score des matchs
+   * @param data 
+   */
+  reqMatchScoreParser( data:any ){
     console.log(data)
     this.score[0] = data.response[0].goals.home;
     this.score[1] = data.response[0].goals.away;
   }
-  /**
-   * Recuperer les details d'un match en particulier
-   */
-  reqMatchDetail(fixId:string){
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-     this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + fixId ,{ headers , responseType: 'text' } ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  );
-    //this.http.get('https://samymahi.eu/match.json' ,{  responseType: 'text' } ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  );
-  }
 
   /**
-   * Parser match detail
+   * parser les detail du match
    * @param data 
    */
-  reqMatchDetailParser( data:ContentMatchDetail ){
+  reqMatchDetailParser( data:any ){
     this.response = data.response
     for( var i=0 ; i < data.response[0].statistics.length ; i++ ){
       this.tabInt[i] = i;
@@ -73,116 +69,13 @@ export class MatchDetailComponent implements OnInit {
     } 
   }
 
-  reqPlayerMatch(fixId:string){
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-    this.http.get(this.ROOT_URL + '/fixtures/lineups?fixture=' + fixId ,{ headers , responseType: 'text' } ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  );
-    //this.http.get('https://samymahi.eu/match-detail-player.json' ,{  responseType: 'text' } ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  );
-  }
-
   /**
-   * Parser match player
+   * parser les donnes des joueurs du match
    * @param data 
    */
-  reqMatchPlayerParser( data:ContentMatchPlayer ){
+  reqMatchPlayerParser( data:any ){
     console.log(data)
     this.playerList = data.response;
     this.playerList[0].startXI[0].player.name
   }
-}
-
-interface ContentMatchDetail {
-  get:string;
-  response:Array<ResponsesMatchDetail>;
-  results:number;
-}
-
-interface ResponsesMatchDetail {
-  team:{
-    id:string,
-    name:string,
-    logo:string
-  },
-  statistics:Array<Statistics>
-}
-
-interface Statistics {
-  type:string,
-  value:string
-}
-
-
-
-interface ContentMatchPlayer {
-  get:string,
-  results:number,
-  response:Array<ResponsesMatchPlayer>
-}
-
-interface ResponsesMatchPlayer {
-  team:{
-    id:string,
-    name:string,
-    logo:string
-  },
-  coach:{
-    id:string,
-    name:string
-  },
-  formation:string,
-  startXI:Array<Players>,
-  substitutes:Array<Players>
-}
-
-interface Players {
-  player:{
-    id:string,
-    name:string,
-    number:string,
-    pos:string
-  }
-}
-
-
-
-interface ScoreContent {
-  get:string;
-  response:Array<{
-    fixture:{
-      date:string,
-      id:number,
-      status:{
-        long:string,
-        elapsed:string
-      }
-    },
-    league:{
-      id:string,
-      name:string,
-      country:string,
-      logo:string,
-      flag:string,
-      season:string
-    },
-    goals:{
-      away:string,
-      home:string
-    },
-    teams:{
-      away:{
-        id:string,
-        logo:string,
-        name:string,
-        winner:string
-      },
-      home:{
-        id:string,
-        logo:string,
-        name:string,
-        winner:string
-      }
-    }
-  }>;
-  results:number;
 }

@@ -6,7 +6,7 @@
     <p class="title" >Dernière Confrontation</p>
         
     <div class="wrapper">
-      <a *ngFor="let response of responses">
+      <a *ngFor="let response of mesMatch.response">
         <div class="teamCell"><app-match-result [data]=response></app-match-result></div>
       </a>
       <div class="teamCell-right"></div>

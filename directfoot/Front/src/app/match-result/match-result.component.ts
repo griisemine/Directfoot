@@ -16,10 +16,10 @@ export class MatchResultComponent implements OnInit {
 
   readonly ROOT_URL = "https://v3.football.api-sports.io"
 
-  constructor(private http: HttpClient ,  public datepipe: DatePipe, private router: Router) {
+  constructor(  public datepipe: DatePipe, private router: Router) {
     
   }
-  @Input() data!: Responses;
+  @Input() data!:any;
   
   homeLogo = "https://media.api-sports.io/football/teams/9244.png"
   homeName = "no_data"
@@ -37,7 +37,16 @@ export class MatchResultComponent implements OnInit {
   leagueID = ""
   season = ""
 
+
   ngOnInit(): void {
+    this.parseData();
+  } 
+
+
+  /**
+   * Parser les donnees recu dans le input
+   */
+  parseData(){
     if(this.data != null){
       this.homeLogo = this.data.teams.home.logo
       this.homeName = this.data.teams.home.name
@@ -68,58 +77,12 @@ export class MatchResultComponent implements OnInit {
         this.elapsed += "\"";
       }
     }
-  } 
-
+  }
 
   goToStat(){
-   // console.log("gotToStats of fixture id = " + this.data.fixture.id)
     const navigationDetails: string[] = ['match-detail'];
     this.router.navigate(navigationDetails);
   }
   
   
-}
-
-interface Content {
-  get:string;
-  response:Array<Responses>;
-  results:number;
-}
-
-interface Responses {
-  fixture:{
-    date:string,
-    id:number,
-    status:{
-      long:string,
-      elapsed:string
-    }
-
-  },
-  league:{
-    id:string,
-    name:string,
-    country:string,
-    logo:string,
-    flag:string,
-    season:string
-  },
-  goals:{
-    away:string,
-    home:string
-  },
-  teams:{
-    away:{
-      id:string,
-      logo:string,
-      name:string,
-      winner:string
-    },
-    home:{
-      id:string,
-      logo:string,
-      name:string,
-      winner:string
-    }
-  }
 }

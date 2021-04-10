@@ -9,16 +9,18 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 export class ApiService {
 
-  ROOT_API: string = "http://127.0.0.1:8080";
+  ROOT_URL: string = "https://v3.football.api-sports.io";
   API_KEY: string = "b21eb12292b3695485d39ea23412ffab";
-  HEADERS = new HttpHeaders().set('x-rapidapi-host', 'v3.football.api-sports.io').set('x-rapidapi-key', this.API_KEY);
 
+  // List des differents matchs
   // Node/Express API
-  constructor( private httpClient: HttpClient ) { }
+  constructor( private httpClient: HttpClient ) {
+    console.log("Je suis dans le constructeur de service");
+   }
 
-  GetUniqueMatch(matchID:string){
-    console.log( this.httpClient.get( this.ROOT_API + '/Match?id=' + matchID ) )
-    return this.httpClient.get( this.ROOT_API + '/Match?id=' + matchID);
+
+  sendRequest(params:string){
+    const headers = new HttpHeaders().set('x-rapidapi-host', 'v3.football.api-sports.io').set('x-rapidapi-key', this.API_KEY );
+    return this.httpClient.get(this.ROOT_URL + params ,{ headers , responseType: 'text' } );
   }
-
 }

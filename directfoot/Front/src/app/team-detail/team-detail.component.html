@@ -96,8 +96,8 @@
 
       <p class="myTeam">Dernière Rencontre</p>
       <div class="wrapper" style="margin-top: 50px;">
-        <a *ngFor="let num of tabInt">
-            <div class="teamCell"><app-match-result [data]=responses[num]></app-match-result></div>
+        <a *ngFor="let match of matchs.response">
+            <div class="teamCell"><app-match-result [data]=match></app-match-result></div>
           </a>
         <div class="teamCell-right"></div>
       </div>

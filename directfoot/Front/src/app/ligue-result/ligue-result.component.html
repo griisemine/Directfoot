@@ -1,4 +1,4 @@
-<h1 style="font-weight: bold;">{{ligueName}}</h1>
+<h1 style="font-weight: bold;">{{mesDonnes.response[0].league.name}}</h1>
 <div class="row-ligue" routerLink="/league" [queryParams]="{ id: ligueID }">
     <div class="top-cell">
         <p class="content-top-cell">#</p>
@@ -13,7 +13,7 @@
         <p class="content-top-cell ">DIF</p>
     </div>
     <hr class="separator">
-    <div *ngFor="let num of tabInt">
-        <app-ligue-cell [standing]=standings[num] [league]=ligueID.toString()  [season]=season></app-ligue-cell>
+    <div *ngFor="let standing of mesDonnes.response[0].league.standings[0]">
+        <app-ligue-cell [standing]=standing [league]=ligueID.toString()  [season]=mesDonnes.response[0].league.season></app-ligue-cell>
     </div>
 </div>
