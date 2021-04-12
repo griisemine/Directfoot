@@ -4,15 +4,15 @@
     </div>
     <div class="match-detail-container">
         <div class="teamHome">
-            <img class="logo" src="{{response[0].team.logo}}" alt="" routerLink="/team" [queryParams]="{ id: response[0].team.id }">
-            <p class="teamName" routerLink="/team" [queryParams]="{ id: response[0].team.id }">{{response[0].team.name}}</p>
+            <img class="logo" src="{{response[0].team.logo}}" alt="" routerLink="/team" [queryParams]="{ id: response[0].team.id , league: leagueID_1 , season: season_1 }">
+            <p class="teamName" routerLink="/team" [queryParams]="{ id: response[0].team.id , league: leagueID_1 , season: season_1 }">{{response[0].team.name}}</p>
         </div>
         <div class="score">
             <p class="score">{{score[0]}} - {{score[1]}}</p>
         </div>
         <div class="teamAway">
-            <img class="logo" src="{{response[1].team.logo}}" alt="" routerLink="/team" [queryParams]="{ id: response[1].team.id }">
-            <p class="teamName" routerLink="/team" [queryParams]="{ id: response[1].team.id }">{{response[1].team.name}}</p>
+            <img class="logo" src="{{response[1].team.logo}}" alt="" routerLink="/team" [queryParams]="{ id: response[1].team.id , league: leagueID_2 , season: season_2 }">
+            <p class="teamName" routerLink="/team" [queryParams]="{ id: response[1].team.id , league: leagueID_2 , season: season_2 }">{{response[1].team.name}}</p>
         </div>
         <div class="stats">
             <a style="all: unset;" *ngFor="let num of tabInt">

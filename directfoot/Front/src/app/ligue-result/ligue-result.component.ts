@@ -21,7 +21,7 @@ export class LigueResultComponent implements OnInit {
    }
   
   ngOnInit(): void {
-    //this.getData(); #UNCOMMUNT
+    this.getData();
   }
 
   /**

@@ -11,6 +11,10 @@ import { ApiService } from '../services/api.service';
 export class MatchDetailComponent implements OnInit {
 
   fixtureID = "";
+  leagueID_1 = "";
+  season_1 = "";
+  leagueID_2 = "";
+  season_2 = "2020";
 
   tabInt: Array<number> = [];
   response!:Array<any>;
@@ -35,9 +39,9 @@ export class MatchDetailComponent implements OnInit {
    */
   getData(){
     if (this.fixtureID != "") {
-      //this.apiService.sendRequest('/fixtures/statistics?fixture=' + this.fixtureID ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  ); #UNCOMMENT
-      //this.apiService.sendRequest('/fixtures/lineups?fixture=' + this.fixtureID ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  ); #UNCOMMENT
-      //this.apiService.sendRequest('/fixtures?id=' + this.fixtureID ).subscribe( data =>  this.reqMatchScoreParser( JSON.parse(data) )  ); #UNCOMMENT
+      this.apiService.sendRequest('/fixtures/statistics?fixture=' + this.fixtureID ).subscribe( data =>  this.reqMatchDetailParser( JSON.parse(data) )  ); 
+      this.apiService.sendRequest('/fixtures/lineups?fixture=' + this.fixtureID ).subscribe( data =>  this.reqMatchPlayerParser( JSON.parse(data) )  ); 
+      this.apiService.sendRequest('/fixtures?id=' + this.fixtureID ).subscribe( data =>  this.reqMatchScoreParser( JSON.parse(data) )  ); 
     }
   }
 
@@ -46,7 +50,9 @@ export class MatchDetailComponent implements OnInit {
    * @param data 
    */
   reqMatchScoreParser( data:any ){
-    console.log(data)
+    console.log(data);
+    this.leagueID_1 = data.response[0].league.id;
+    this.leagueID_2 = data.response[1].league.id;
     this.score[0] = data.response[0].goals.home;
     this.score[1] = data.response[0].goals.away;
   }
