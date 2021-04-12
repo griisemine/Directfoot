@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-ligue-detail',
@@ -19,7 +20,7 @@ export class LigueDetailComponent implements OnInit, OnChanges {
   id = ""
   round = ""
   
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute , private changeDetector: ChangeDetectorRef,private router:Router ) {
+  constructor( private apiService:ApiService ,private http: HttpClient, private activatedRoute: ActivatedRoute , private changeDetector: ChangeDetectorRef,private router:Router ) {
     this.activatedRoute.queryParams.subscribe(params => {
         this.id = params['id'];
         console.log(params['id'])
@@ -50,14 +51,13 @@ export class LigueDetailComponent implements OnInit, OnChanges {
 
 
   envoyerRequete( ){
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-host', 'v3.football.api-sports.io')
-      .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
+    //const headers = new HttpHeaders()
+    //  .set('x-rapidapi-host', 'v3.football.api-sports.io')
+    //  .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
       
-   // this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
-   
-    this.http.get('https://samymahi.eu/rounds_list.json' ,{  responseType: 'text' } )
-    .subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+    //this.http.get(this.ROOT_URL + '/fixtures/statistics?fixture=' + this.fixtureID ,{ headers , responseType: 'text' } ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+    //this.apiService.sendRequest( '/fixtures/statistics?fixture=' + this.fixtureID ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
+    this.http.get('https://samymahi.eu/rounds_list.json' ,{  responseType: 'text' } ).subscribe( data =>  this.dataParser( JSON.parse(data) )  );
   }
   dataParser( data:any ){
     for(var i = 0 ; i < data.response.length ; i++){
@@ -73,11 +73,12 @@ export class LigueDetailComponent implements OnInit, OnChanges {
    * @param params les parametres de la requete
    */
      envoyerRequeteMatch (rounds:string){
-       const headers = new HttpHeaders()
-        .set('x-rapidapi-host', 'v3.football.api-sports.io')
-        .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
-      this.http.get("https://v3.football.api-sports.io/fixtures?league=" + this.id + "&season=2020&round=" + rounds ,{ headers , responseType: 'text' } )
-              .subscribe( data =>  this.dataParserMatch( JSON.parse(data) )  );
+      // const headers = new HttpHeaders()
+      //  .set('x-rapidapi-host', 'v3.football.api-sports.io')
+      //  .set('x-rapidapi-key', 'b21eb12292b3695485d39ea23412ffab');
+
+   //   this.http.get("https://v3.football.api-sports.io/fixtures?league=" + this.id + "&season=2020&round=" + rounds ,{ headers , responseType: 'text' } ).subscribe( data =>  this.dataParserMatch( JSON.parse(data) )  );
+      this.apiService.sendRequest( '/fixtures?league=' + this.id + "&season=2020&round=" + rounds ).subscribe( data =>  this.dataParserMatch( JSON.parse(data) )  );
     }
   
     /**
